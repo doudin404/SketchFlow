@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <meta name="title" content="SketchFlow: Zero-Shot Vector Sketch Generation via GMM Prior Flow in CLIP Latent Space">
+  <meta name="description" content="SketchFlow learns a GMM prior flow in CLIP latent space to generate human-like vector stroke trajectories from open-vocabulary text prompts.">
+  <meta name="keywords" content="SketchFlow, vector sketch generation, flow matching, optimal transport, CLIP, QuickDraw, diffusion model, computer graphics">
+  <meta name="author" content="Jin Zhou, Hongliang Yang, Pengfei Xu, Hui Huang">
+  <meta name="robots" content="index, follow">
+  <meta name="language" content="English">
+
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Visual Computing Research Center, Shenzhen University">
+  <meta property="og:title" content="SketchFlow">
+  <meta property="og:description" content="Zero-shot vector sketch generation via GMM prior flow in CLIP latent space.">
+  <meta property="og:url" content="https://doudin404.github.io/SketchFlow/">
+  <meta property="og:image" content="https://doudin404.github.io/SketchFlow/static/images/social_preview.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="SketchFlow open-vocabulary vector sketch results">
+  <meta property="article:published_time" content="2026-07-19T00:00:00.000Z">
+  <meta property="article:author" content="Jin Zhou">
+  <meta property="article:section" content="Computer Graphics">
+  <meta property="article:tag" content="Vector Sketch Generation">
+  <meta property="article:tag" content="Flow Matching">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="SketchFlow">
+  <meta name="twitter:description" content="Zero-shot vector sketch generation via GMM prior flow in CLIP latent space.">
+  <meta name="twitter:image" content="https://doudin404.github.io/SketchFlow/static/images/social_preview.png">
+  <meta name="twitter:image:alt" content="SketchFlow open-vocabulary vector sketch results">
+
+  <meta name="citation_title" content="SketchFlow: Zero-Shot Vector Sketch Generation via GMM Prior Flow in CLIP Latent Space">
+  <meta name="citation_author" content="Zhou, Jin">
+  <meta name="citation_author" content="Yang, Hongliang">
+  <meta name="citation_author" content="Xu, Pengfei">
+  <meta name="citation_author" content="Huang, Hui">
+  <meta name="citation_publication_date" content="2026">
+  <meta name="citation_conference_title" content="ACM SIGGRAPH Asia 2026 Conference Papers">
+  <meta name="citation_pdf_url" content="https://doudin404.github.io/SketchFlow/static/pdfs/SketchFlow.pdf">
+
+  <meta name="theme-color" content="#225fb3">
+  <meta name="msapplication-TileColor" content="#225fb3">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://ajax.googleapis.com">
+  <link rel="preconnect" href="https://cdn.jsdelivr.net">
+
+  <title>SketchFlow | SIGGRAPH Asia 2026</title>
+
+  <link rel="icon" type="image/svg+xml" href="static/images/favicon.svg">
+  <link rel="stylesheet" href="static/css/bulma.min.css">
+  <link rel="stylesheet" href="static/css/index.css?v=3">
+  <link rel="preload" href="static/css/bulma-carousel.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <link rel="preload" href="static/css/fontawesome.all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <link rel="preload" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript>
+    <link rel="stylesheet" href="static/css/bulma-carousel.min.css">
+    <link rel="stylesheet" href="static/css/fontawesome.all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  </noscript>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+
+  <script defer src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="static/js/fontawesome.all.min.js"></script>
+  <script defer src="static/js/bulma-carousel.min.js"></script>
+  <script defer src="static/js/index.js"></script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ScholarlyArticle",
+    "headline": "SketchFlow: Zero-Shot Vector Sketch Generation via GMM Prior Flow in CLIP Latent Space",
+    "description": "SketchFlow learns a GMM prior flow in CLIP latent space to generate human-like vector stroke trajectories from open-vocabulary text prompts.",
+    "author": [
+      {"@type": "Person", "name": "Jin Zhou", "affiliation": {"@type": "Organization", "name": "Shenzhen University"}},
+      {"@type": "Person", "name": "Hongliang Yang", "affiliation": {"@type": "Organization", "name": "Shenzhen University"}},
+      {"@type": "Person", "name": "Pengfei Xu", "affiliation": {"@type": "Organization", "name": "Shenzhen University"}},
+      {"@type": "Person", "name": "Hui Huang", "affiliation": {"@type": "Organization", "name": "Shenzhen University"}}
+    ],
+    "datePublished": "2026",
+    "publisher": {"@type": "Organization", "name": "ACM SIGGRAPH Asia"},
+    "url": "https://doudin404.github.io/SketchFlow/",
+    "image": "https://doudin404.github.io/SketchFlow/static/images/social_preview.png",
+    "keywords": ["vector sketch generation", "flow matching", "optimal transport", "CLIP", "diffusion model"],
+    "isAccessibleForFree": true,
+    "mainEntity": {"@type": "WebPage", "@id": "https://doudin404.github.io/SketchFlow/"}
+  }
+  </script>
+</head>
+
+<body>
+  <button class="scroll-to-top" onclick="scrollToTop()" title="Scroll to top" aria-label="Scroll to top">
+    <i class="fas fa-chevron-up"></i>
+  </button>
+
+  <main id="main-content">
+    <section class="hero publication-header">
+      <div class="hero-body">
+        <div class="container is-max-desktop">
+          <div class="columns is-centered">
+            <div class="column has-text-centered">
+              <p class="venue-label">SIGGRAPH Asia 2026</p>
+              <h1 class="title is-1 publication-title">
+                SketchFlow
+              </h1>
+              <p class="publication-subtitle">
+                Zero-Shot Vector Sketch Generation via GMM Prior Flow in CLIP Latent Space
+              </p>
+
+              <div class="is-size-5 publication-authors">
+                <span class="author-block">
+                  <a href="https://doudin404.github.io" target="_blank" rel="noopener">Jin Zhou</a>,
+                </span>
+                <span class="author-block">
+                  <a href="https://qiuhong-1202.github.io" target="_blank" rel="noopener">Hongliang Yang</a>,
+                </span>
+                <span class="author-block">
+                  <a href="https://pengfeixu.com" target="_blank" rel="noopener">Pengfei Xu</a>,
+                </span>
+                <span class="author-block">
+                  <a href="https://vcc.tech/~huihuang" target="_blank" rel="noopener">Hui Huang</a>
+                </span>
+              </div>
+
+              <div class="is-size-5 publication-authors publication-affiliation">
+                <span class="author-block">Shenzhen University</span>
+              </div>
+
+              <div class="column has-text-centered">
+                <div class="publication-links">
+                  <span class="link-block">
+                    <a href="static/pdfs/SketchFlow.pdf" target="_blank" class="external-link button is-normal is-rounded is-dark">
+                      <span class="icon"><i class="fas fa-file-pdf"></i></span>
+                      <span>Paper</span>
+                    </a>
+                  </span>
+                  <span class="link-block">
+                    <a href="https://github.com/doudin404/SketchFlow" target="_blank" rel="noopener" class="external-link button is-normal is-rounded is-dark">
+                      <span class="icon"><i class="fab fa-github"></i></span>
+                      <span>Code</span>
+                    </a>
+                  </span>
+                  <span class="link-block">
+                    <a href="https://github.com/doudin404/SketchFlow/releases/tag/v1.0.0" target="_blank" rel="noopener" class="external-link button is-normal is-rounded is-dark">
+                      <span class="icon"><i class="fas fa-download"></i></span>
+                      <span>Model</span>
+                    </a>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="hero teaser">
+      <div class="container is-max-desktop">
+        <div class="hero-body">
+          <figure class="publication-banner">
+            <img src="static/images/hero-results.png" alt="SketchFlow generations of letters, numbers, landmarks, characters, emotions, and poses">
+          </figure>
+          <h2 class="subtitle has-text-centered teaser-caption">
+            SketchFlow generates open-vocabulary vector sketches while preserving sparse, human-like stroke trajectories.
+          </h2>
+        </div>
+      </div>
+    </section>
+
+    <section class="section hero is-light">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered has-text-centered">
+          <div class="column is-four-fifths">
+            <h2 class="title is-3">Abstract</h2>
+            <div class="content has-text-justified">
+              <p>
+                Vector sketches are a concise medium for abstract human expression, yet high-quality text-to-sketch pairs are scarce. SketchFlow formulates cross-modal alignment as a continuous mapping problem in CLIP latent space. It expands discrete category text embeddings into a continuous Gaussian Mixture Model prior, then learns an Optimal Transport Conditional Flow Matching vector field that transports this prior to the rendered-sketch feature distribution. A hybrid diffusion decoder combining a 1D U-Net and Transformer decodes the transported features into vector stroke trajectories. Trained from category-only QuickDraw sketches, SketchFlow supports fast zero-shot synthesis for open-vocabulary concepts, semantic modifiers, and continuous concept interpolation.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered has-text-centered">
+          <div class="column is-full-width">
+            <h2 class="title is-3">Method</h2>
+            <figure class="method-figure">
+              <img src="static/images/method-overview.png" alt="SketchFlow method overview">
+            </figure>
+            <div class="columns method-steps">
+              <div class="column">
+                <p class="step-number">01</p>
+                <h3 class="title is-5">Continuous GMM Prior</h3>
+                <p>Noise around category text embeddings expands isolated semantic anchors into a continuous source distribution.</p>
+              </div>
+              <div class="column">
+                <p class="step-number">02</p>
+                <h3 class="title is-5">OT-CFM Transport</h3>
+                <p>A learned vector field transports the GMM prior toward the rendered-sketch manifold in CLIP space.</p>
+              </div>
+              <div class="column">
+                <p class="step-number">03</p>
+                <h3 class="title is-5">Vector Decoding</h3>
+                <p>A hybrid 1D U-Net and Transformer diffusion decoder generates ordered 256-point stroke trajectories.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="facts-strip">
+      <div class="container is-max-desktop">
+        <div class="columns is-mobile is-multiline">
+          <div class="column is-one-quarter-desktop is-half-mobile fact">
+            <strong>345</strong>
+            <span>QuickDraw categories</span>
+          </div>
+          <div class="column is-one-quarter-desktop is-half-mobile fact">
+            <strong>~50M</strong>
+            <span>human-drawn sketches</span>
+          </div>
+          <div class="column is-one-quarter-desktop is-half-mobile fact">
+            <strong>256</strong>
+            <span>points per trajectory</span>
+          </div>
+          <div class="column is-one-quarter-desktop is-half-mobile fact">
+            <strong>ViT-B/32</strong>
+            <span>shared CLIP space</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="hero is-small results-section" id="results">
+      <div class="hero-body">
+        <div class="container">
+          <h2 class="title is-3 has-text-centered">Open-Vocabulary Results</h2>
+          <div id="results-carousel" class="carousel results-carousel">
+            <div class="item">
+              <img src="static/images/hero-results.png" alt="Open-vocabulary SketchFlow results" loading="lazy">
+              <h2 class="subtitle has-text-centered">Letters, numbers, Malaysian landmarks, characters, emotions, and dynamic poses.</h2>
+            </div>
+            <div class="item">
+              <img src="static/images/open-vocabulary-results.png" alt="Additional open-vocabulary SketchFlow results" loading="lazy">
+              <h2 class="subtitle has-text-centered">Distinctive concepts outside the 345-category training taxonomy.</h2>
+            </div>
+            <div class="item">
+              <img src="static/images/method-overview.png" alt="SketchFlow GMM prior flow" loading="lazy">
+              <h2 class="subtitle has-text-centered">The GMM prior flow bridges discrete text anchors and continuous sketch features.</h2>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section drawing-section">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered has-text-centered">
+          <div class="column is-full-width">
+            <h2 class="title is-3">Drawing Process</h2>
+            <p class="section-lead">Each animation follows the generated vector trajectory from its first point to the completed sketch.</p>
+
+            <div class="sequence-group">
+              <div class="sequence-heading">
+                <h3 class="title is-5">SIGGRAPH</h3>
+                <span>8 generated trajectories</span>
+              </div>
+              <div class="sequence-grid sequence-grid-eight">
+                <img src="static/sequences/siggraph/line_1_1_S.gif" alt="Generated letter S" loading="lazy">
+                <img src="static/sequences/siggraph/line_1_2_I.gif" alt="Generated letter I" loading="lazy">
+                <img src="static/sequences/siggraph/line_1_3_G.gif" alt="Generated letter G" loading="lazy">
+                <img src="static/sequences/siggraph/line_1_4_G.gif" alt="Generated letter G" loading="lazy">
+                <img src="static/sequences/siggraph/line_1_5_R.gif" alt="Generated letter R" loading="lazy">
+                <img src="static/sequences/siggraph/line_1_6_A.gif" alt="Generated letter A" loading="lazy">
+                <img src="static/sequences/siggraph/line_1_7_P.gif" alt="Generated letter P" loading="lazy">
+                <img src="static/sequences/siggraph/line_1_8_H.gif" alt="Generated letter H" loading="lazy">
+              </div>
+            </div>
+
+            <div class="sequence-group">
+              <div class="sequence-heading">
+                <h3 class="title is-5">ASIA 2026</h3>
+                <span>8 generated trajectories</span>
+              </div>
+              <div class="sequence-grid sequence-grid-eight">
+                <img src="static/sequences/asia/line_2_1_A.gif" alt="Generated letter A" loading="lazy">
+                <img src="static/sequences/asia/line_2_2_S.gif" alt="Generated letter S" loading="lazy">
+                <img src="static/sequences/asia/line_2_3_I.gif" alt="Generated letter I" loading="lazy">
+                <img src="static/sequences/asia/line_2_4_A.gif" alt="Generated letter A" loading="lazy">
+                <img src="static/sequences/2026/line_2_1_2.gif" alt="Generated digit 2" loading="lazy">
+                <img src="static/sequences/2026/line_2_2_0.gif" alt="Generated digit 0" loading="lazy">
+                <img src="static/sequences/2026/line_2_3_2.gif" alt="Generated digit 2" loading="lazy">
+                <img src="static/sequences/2026/line_2_4_6.gif" alt="Generated digit 6" loading="lazy">
+              </div>
+            </div>
+
+            <div class="sequence-group">
+              <div class="sequence-heading">
+                <h3 class="title is-5">Malaysia Landmarks</h3>
+                <span>6 generated trajectories</span>
+              </div>
+              <div class="sequence-grid sequence-grid-six">
+                <img src="static/sequences/malaysia/line_3_malaysia_1.gif" alt="Generated Malaysia landmark 1" loading="lazy">
+                <img src="static/sequences/malaysia/line_3_malaysia_2.gif" alt="Generated Malaysia landmark 2" loading="lazy">
+                <img src="static/sequences/malaysia/line_3_malaysia_3.gif" alt="Generated Malaysia landmark 3" loading="lazy">
+                <img src="static/sequences/malaysia/line_3_malaysia_4.gif" alt="Generated Malaysia landmark 4" loading="lazy">
+                <img src="static/sequences/malaysia/line_3_malaysia_5.gif" alt="Generated Malaysia landmark 5" loading="lazy">
+                <img src="static/sequences/malaysia/line_3_malaysia_6.gif" alt="Generated Malaysia landmark 6" loading="lazy">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section scope-section">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column is-four-fifths">
+            <h2 class="title is-3 has-text-centered">Scope and Limitations</h2>
+            <div class="content has-text-justified">
+              <p>
+                SketchFlow is trained from the 345 discrete QuickDraw categories. It is not a general image model and does not reliably parse long, compositional prompts. Its strongest zero-shot behavior appears on concise, visually distinctive concepts that CLIP represents clearly, such as Kirby, Mickey, ghosts, rockets, emotions, symbols, and landmarks. Generation remains stochastic, so sampling multiple candidates can be useful.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="citation">
+      <div class="container is-max-desktop content">
+        <div class="bibtex-header">
+          <h2 class="title is-3">BibTeX</h2>
+          <button class="copy-bibtex-btn" onclick="copyBibTeX()" aria-label="Copy BibTeX citation">
+            <i class="fas fa-copy"></i>
+            <span class="copy-text">Copy</span>
+          </button>
+        </div>
+        <pre><code id="bibtex-code">@inproceedings{zhou2026sketchflow,
+  title     = {SketchFlow: Zero-Shot Vector Sketch Generation
+               via GMM Prior Flow in CLIP Latent Space},
+  author    = {Zhou, Jin and Yang, Hongliang and
+               Xu, Pengfei and Huang, Hui},
+  booktitle = {ACM SIGGRAPH Asia 2026 Conference Papers},
+  year      = {2026}
+}</code></pre>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="content has-text-centered">
+        <p>
+          SketchFlow code and model weights are released under the MIT License.
+          This website is based on the
+          <a href="https://github.com/eliahuhorwitz/Academic-project-page-template" target="_blank" rel="noopener">Academic Project Page Template</a>
+          and follows its
+          <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">CC BY-SA 4.0</a>
+          website license.
+        </p>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
