@@ -1,0 +1,29 @@
+[build-system]
+requires = ["setuptools>=69"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "sketchflow"
+version = "1.0.0"
+description = "Zero-shot vector sketch generation via GMM prior flow in CLIP latent space"
+readme = "README.md"
+requires-python = ">=3.10"
+license = {text = "MIT"}
+authors = [
+  {name = "Jin Zhou"},
+  {name = "Hongliang Yang"},
+  {name = "Pengfei Xu"},
+  {name = "Hui Huang"},
+]
+
+[tool.setuptools]
+py-modules = []
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["data_process*", "dataset*", "eval*", "model*", "nets*", "script*", "ui*", "utils*"]
+namespaces = true
+
+[tool.ruff]
+line-length = 88
+target-version = "py310"

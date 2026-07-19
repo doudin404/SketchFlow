@@ -1,0 +1,59 @@
+# Python
+__pycache__/
+*.py[cod]
+*.so
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.coverage*
+htmlcov/
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+
+# Editors and local app state
+.idea/
+.vscode/
+.cursor/
+.gradio/
+
+# Secrets and credentials
+.env
+.env.*
+*.pem
+*.key
+*.crt
+huggingface/
+wandb/
+
+# Build artifacts
+build/
+dist/
+*.egg-info/
+
+# Datasets, caches, generated media, and training outputs
+data/
+cache/
+data_cache/
+tb_logs/
+lightning_logs/
+val_samples/
+output/
+outputs/
+ui_results/
+rendered_samples/
+checkpoints/
+pretrained/
+
+# Large model/data artifacts
+*.ckpt
+*.pt
+*.pth
+*.safetensors
+*.npy
+*.npz
+*.parquet
+*.arrow
