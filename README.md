@@ -2,7 +2,7 @@
 
 **Zero-Shot Vector Sketch Generation via GMM Prior Flow in CLIP Latent Space**
 
-[Project page](https://sketchflow-project.doudinworld.chatgpt.site) |
+[Project page](https://doudin404.github.io/SketchFlow/) |
 [Model weights](https://github.com/doudin404/SketchFlow/releases/tag/v1.0.0) |
 [Model card](MODEL_CARD.md)
 
