@@ -3,6 +3,8 @@
 **Zero-Shot Vector Sketch Generation via GMM Prior Flow in CLIP Latent Space**
 
 [Project page](https://doudin404.github.io/SketchFlow/) |
+[arXiv](https://arxiv.org/abs/2608.21659) |
+[DOI](https://doi.org/10.1145/3829340.3842307) |
 [Model weights](https://github.com/doudin404/SketchFlow/releases/tag/v1.0.0) |
 [Model card](MODEL_CARD.md)
 
@@ -152,11 +154,13 @@ useful.
                Flow in CLIP Latent Space},
   author    = {Zhou, Jin and Yang, Hongliang and Xu, Pengfei and Huang, Hui},
   booktitle = {ACM SIGGRAPH Asia 2026 Conference Papers},
-  year      = {2026}
+  year      = {2026},
+  doi       = {10.1145/3829340.3842307},
+  eprint    = {2608.21659},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.CV}
 }
 ```
-
-Final proceedings metadata will be added after publication processing.
 
 ## Acknowledgments
 
