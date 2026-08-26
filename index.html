@@ -5,21 +5,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <meta name="title" content="SketchFlow: Zero-Shot Vector Sketch Generation via GMM Prior Flow in CLIP Latent Space">
-  <meta name="description" content="SketchFlow learns a GMM prior flow in CLIP latent space to generate human-like vector stroke trajectories from open-vocabulary text prompts.">
+  <meta name="description" content="SketchFlow learns a GMM prior flow in CLIP latent space to generate human-like vector stroke trajectories for prompts beyond the QuickDraw training vocabulary.">
   <meta name="keywords" content="SketchFlow, vector sketch generation, flow matching, optimal transport, CLIP, QuickDraw, diffusion model, computer graphics">
   <meta name="author" content="Jin Zhou, Hongliang Yang, Pengfei Xu, Hui Huang">
   <meta name="robots" content="index, follow">
   <meta name="language" content="English">
 
   <meta property="og:type" content="article">
-  <meta property="og:site_name" content="Visual Computing Research Center, Shenzhen University">
+  <meta property="og:site_name" content="Guangdong Provincial Key Laboratory of Visual Media and Multidimensional Intelligence, Shenzhen University">
   <meta property="og:title" content="SketchFlow">
   <meta property="og:description" content="Zero-shot vector sketch generation via GMM prior flow in CLIP latent space.">
   <meta property="og:url" content="https://doudin404.github.io/SketchFlow/">
   <meta property="og:image" content="https://doudin404.github.io/SketchFlow/static/images/social_preview.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
-  <meta property="og:image:alt" content="SketchFlow open-vocabulary vector sketch results">
+  <meta property="og:image:alt" content="SketchFlow zero-shot vector sketch results">
   <meta property="article:published_time" content="2026-07-19T00:00:00.000Z">
   <meta property="article:author" content="Jin Zhou">
   <meta property="article:section" content="Computer Graphics">
@@ -30,7 +30,7 @@
   <meta name="twitter:title" content="SketchFlow">
   <meta name="twitter:description" content="Zero-shot vector sketch generation via GMM prior flow in CLIP latent space.">
   <meta name="twitter:image" content="https://doudin404.github.io/SketchFlow/static/images/social_preview.png">
-  <meta name="twitter:image:alt" content="SketchFlow open-vocabulary vector sketch results">
+  <meta name="twitter:image:alt" content="SketchFlow zero-shot vector sketch results">
 
   <meta name="citation_title" content="SketchFlow: Zero-Shot Vector Sketch Generation via GMM Prior Flow in CLIP Latent Space">
   <meta name="citation_author" content="Zhou, Jin">
@@ -78,12 +78,12 @@
     "@context": "https://schema.org",
     "@type": "ScholarlyArticle",
     "headline": "SketchFlow: Zero-Shot Vector Sketch Generation via GMM Prior Flow in CLIP Latent Space",
-    "description": "SketchFlow learns a GMM prior flow in CLIP latent space to generate human-like vector stroke trajectories from open-vocabulary text prompts.",
+    "description": "SketchFlow learns a GMM prior flow in CLIP latent space to generate human-like vector stroke trajectories for prompts beyond the QuickDraw training vocabulary.",
     "author": [
-      {"@type": "Person", "name": "Jin Zhou", "affiliation": {"@type": "Organization", "name": "Shenzhen University"}},
-      {"@type": "Person", "name": "Hongliang Yang", "affiliation": {"@type": "Organization", "name": "Shenzhen University"}},
-      {"@type": "Person", "name": "Pengfei Xu", "affiliation": {"@type": "Organization", "name": "Shenzhen University"}},
-      {"@type": "Person", "name": "Hui Huang", "affiliation": {"@type": "Organization", "name": "Shenzhen University"}}
+      {"@type": "Person", "name": "Jin Zhou", "affiliation": {"@type": "Organization", "name": "Guangdong Provincial Key Laboratory of Visual Media and Multidimensional Intelligence, CSSE, Shenzhen University"}},
+      {"@type": "Person", "name": "Hongliang Yang", "affiliation": {"@type": "Organization", "name": "Guangdong Provincial Key Laboratory of Visual Media and Multidimensional Intelligence, CSSE, Shenzhen University"}},
+      {"@type": "Person", "name": "Pengfei Xu", "affiliation": {"@type": "Organization", "name": "Guangdong Provincial Key Laboratory of Visual Media and Multidimensional Intelligence, CSSE, Shenzhen University"}},
+      {"@type": "Person", "name": "Hui Huang", "affiliation": {"@type": "Organization", "name": "Guangdong Provincial Key Laboratory of Visual Media and Multidimensional Intelligence, CSSE, Shenzhen University"}}
     ],
     "datePublished": "2026",
     "publisher": {"@type": "Organization", "name": "ACM SIGGRAPH Asia"},
@@ -137,7 +137,7 @@
               </div>
 
               <div class="is-size-5 publication-authors publication-affiliation">
-                <span class="author-block">Shenzhen University</span>
+                <span class="author-block">Guangdong Provincial Key Laboratory of Visual Media and Multidimensional Intelligence, CSSE, Shenzhen University</span>
               </div>
 
               <div class="column has-text-centered">
@@ -184,10 +184,10 @@
       <div class="container is-max-desktop">
         <div class="hero-body">
           <figure class="publication-banner">
-            <img src="static/images/hero-results.png" alt="SketchFlow generations of letters, numbers, landmarks, characters, emotions, and poses">
+            <img src="static/images/hero-results.png?v=2" alt="SketchFlow generations of letters, numbers, landmarks, characters, emotions, and poses">
           </figure>
           <h2 class="subtitle has-text-centered teaser-caption">
-            SketchFlow generates open-vocabulary vector sketches while preserving sparse, human-like stroke trajectories.
+            SketchFlow generates vector sketches beyond the QuickDraw training vocabulary while preserving sparse, human-like stroke trajectories.
           </h2>
         </div>
       </div>
@@ -200,7 +200,7 @@
             <h2 class="title is-3">Abstract</h2>
             <div class="content has-text-justified">
               <p>
-                Vector sketches are a concise medium for abstract human expression, yet high-quality text-to-sketch pairs are scarce. SketchFlow formulates cross-modal alignment as a continuous mapping problem in CLIP latent space. It expands discrete category text embeddings into a continuous Gaussian Mixture Model prior, then learns an Optimal Transport Conditional Flow Matching vector field that transports this prior to the rendered-sketch feature distribution. A hybrid diffusion decoder combining a 1D U-Net and Transformer decodes the transported features into vector stroke trajectories. Trained from category-only QuickDraw sketches, SketchFlow supports fast zero-shot synthesis for open-vocabulary concepts, semantic modifiers, and continuous concept interpolation.
+                Vector sketches are a concise medium for abstract human expression, yet high-quality text-to-sketch pairs are scarce. SketchFlow formulates cross-modal alignment as a continuous mapping problem in CLIP latent space. It expands discrete category text embeddings into a continuous Gaussian Mixture Model prior, then learns an Optimal Transport Conditional Flow Matching vector field that transports this prior to the rendered-sketch feature distribution. A hybrid diffusion decoder combining a 1D U-Net and Transformer decodes the transported features into vector stroke trajectories. Trained from category-only QuickDraw sketches, SketchFlow supports fast local zero-shot synthesis for concepts and semantic modifiers beyond the QuickDraw training vocabulary, together with continuous concept interpolation.
               </p>
             </div>
           </div>
@@ -264,14 +264,14 @@
     <section class="hero is-small results-section" id="results">
       <div class="hero-body">
         <div class="container">
-          <h2 class="title is-3 has-text-centered">Open-Vocabulary Results</h2>
+          <h2 class="title is-3 has-text-centered">Zero-Shot Results Beyond the Training Vocabulary</h2>
           <div id="results-carousel" class="carousel results-carousel">
             <div class="item">
-              <img src="static/images/hero-results.png" alt="Open-vocabulary SketchFlow results" loading="lazy">
+              <img src="static/images/hero-results.png?v=2" alt="SketchFlow results beyond the training vocabulary" loading="lazy">
               <h2 class="subtitle has-text-centered">Letters, numbers, Malaysian landmarks, characters, emotions, and dynamic poses.</h2>
             </div>
             <div class="item">
-              <img src="static/images/open-vocabulary-results.png" alt="Additional open-vocabulary SketchFlow results" loading="lazy">
+              <img src="static/images/open-vocabulary-results.png?v=2" alt="Additional SketchFlow results beyond the training vocabulary" loading="lazy">
               <h2 class="subtitle has-text-centered">Distinctive concepts outside the 345-category training taxonomy.</h2>
             </div>
             <div class="item">
