@@ -240,42 +240,6 @@ a {
   font-weight: 600;
 }
 
-.facts-strip {
-  padding: 2.8rem 1.5rem;
-  background: var(--blue-soft);
-  border-top: 1px solid #cfe0f4;
-  border-bottom: 1px solid #cfe0f4;
-}
-
-.facts-strip .columns {
-  margin: 0;
-}
-
-.fact {
-  display: flex;
-  min-width: 0;
-  flex-direction: column;
-  justify-content: center;
-  padding: 0.75rem 1.5rem !important;
-  text-align: center;
-}
-
-.fact + .fact {
-  border-left: 1px solid #bad0ea;
-}
-
-.fact strong {
-  color: var(--blue);
-  font-size: 2.05rem;
-  line-height: 1.15;
-}
-
-.fact span {
-  margin-top: 0.35rem;
-  color: #40506a;
-  font-size: 0.82rem;
-}
-
 .results-section {
   background: #ffffff;
 }
@@ -542,14 +506,6 @@ a:focus {
 
   .method-steps .column + .column {
     border-left: 0;
-  }
-
-  .fact:nth-child(odd) {
-    border-left: 0;
-  }
-
-  .fact:nth-child(n + 3) {
-    border-top: 1px solid #bad0ea;
   }
 
   .results-carousel .item {
