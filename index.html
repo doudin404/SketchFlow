@@ -50,7 +50,6 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="preconnect" href="https://ajax.googleapis.com">
   <link rel="preconnect" href="https://cdn.jsdelivr.net">
 
   <title>SketchFlow | SIGGRAPH Asia 2026</title>
@@ -58,19 +57,15 @@
   <link rel="icon" type="image/svg+xml" href="static/images/favicon.svg">
   <link rel="stylesheet" href="static/css/bulma.min.css">
   <link rel="stylesheet" href="static/css/index.css?v=3">
-  <link rel="preload" href="static/css/bulma-carousel.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
   <link rel="preload" href="static/css/fontawesome.all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
   <link rel="preload" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
   <noscript>
-    <link rel="stylesheet" href="static/css/bulma-carousel.min.css">
     <link rel="stylesheet" href="static/css/fontawesome.all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
   </noscript>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
 
-  <script defer src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script defer src="static/js/fontawesome.all.min.js"></script>
-  <script defer src="static/js/bulma-carousel.min.js"></script>
   <script defer src="static/js/index.js"></script>
 
   <script type="application/ld+json">
@@ -184,11 +179,12 @@
       <div class="container is-max-desktop">
         <div class="hero-body">
           <figure class="publication-banner">
-            <img src="static/images/hero-results.png?v=2" alt="SketchFlow generations of letters, numbers, landmarks, characters, emotions, and poses">
+            <img src="static/images/hero-results.png?v=3" alt="SketchFlow generations of letters, numbers, Malaysian landmarks, characters, emotions, and poses">
+            <figcaption class="figure-caption teaser-caption">
+              <strong>Local zero-shot vector sketch generation by SketchFlow.</strong>
+              SketchFlow leverages drawing priors from the CLIP latent space to synthesize prompts beyond its 345-class QuickDraw training vocabulary. The left shows text-prompted letters, numbers, and landmarks in Malaysia; the right shows pop-culture characters, creatures, abstract emotions, and dynamic poses. These prompts have no category-specific training examples.
+            </figcaption>
           </figure>
-          <h2 class="subtitle has-text-centered teaser-caption">
-            SketchFlow generates vector sketches beyond the QuickDraw training vocabulary while preserving sparse, human-like stroke trajectories.
-          </h2>
         </div>
       </div>
     </section>
@@ -215,6 +211,10 @@
             <h2 class="title is-3">Method</h2>
             <figure class="method-figure">
               <img src="static/images/method-overview.png" alt="SketchFlow method overview">
+              <figcaption class="figure-caption">
+                <strong>Overview of the SketchFlow generative framework.</strong>
+                Noise injection expands discrete text anchors into a continuous GMM prior. OT-CFM learns a deterministic transport to the rendered-sketch feature distribution. At inference, an unseen CLIP query follows the learned field to a target sketch embedding, which the Hybrid Diffusion Decoder converts into a vector stroke sequence.
+              </figcaption>
             </figure>
             <div class="columns method-steps">
               <div class="column">
@@ -238,25 +238,16 @@
       </div>
     </section>
 
-    <section class="hero is-small results-section" id="results">
-      <div class="hero-body">
-        <div class="container">
-          <h2 class="title is-3 has-text-centered">Zero-Shot Results Beyond the Training Vocabulary</h2>
-          <div id="results-carousel" class="carousel results-carousel">
-            <div class="item">
-              <img src="static/images/hero-results.png?v=2" alt="SketchFlow results beyond the training vocabulary" loading="lazy">
-              <h2 class="subtitle has-text-centered">Letters, numbers, Malaysian landmarks, characters, emotions, and dynamic poses.</h2>
-            </div>
-            <div class="item">
-              <img src="static/images/open-vocabulary-results.png?v=2" alt="Additional SketchFlow results beyond the training vocabulary" loading="lazy">
-              <h2 class="subtitle has-text-centered">Distinctive concepts outside the 345-category training taxonomy.</h2>
-            </div>
-            <div class="item">
-              <img src="static/images/method-overview.png" alt="SketchFlow GMM prior flow" loading="lazy">
-              <h2 class="subtitle has-text-centered">The GMM prior flow bridges discrete text anchors and continuous sketch features.</h2>
-            </div>
-          </div>
-        </div>
+    <section class="section results-section" id="results">
+      <div class="container is-max-desktop">
+        <h2 class="title is-3 has-text-centered">Zero-Shot Results Beyond the Training Vocabulary</h2>
+        <figure class="result-figure">
+          <img src="static/images/open-vocabulary-results.png?v=3" alt="SketchFlow vector sketches for prompts outside the QuickDraw training vocabulary" loading="lazy">
+          <figcaption class="figure-caption">
+            <strong>Zero-shot generation beyond the training vocabulary.</strong>
+            All prompts shown here lie outside the QuickDraw taxonomy, yet the model produces coherent and style-consistent vector sketches. Examples include Pikachu, Tetromino, and Goblin, together with the composite and plural prompts Sun &amp; cloud and Two eyes.
+          </figcaption>
+        </figure>
       </div>
     </section>
 

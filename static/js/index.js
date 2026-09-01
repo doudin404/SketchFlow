@@ -39,16 +39,3 @@ window.addEventListener("scroll", () => {
     scrollButton.classList.toggle("visible", window.scrollY > 300);
   }
 });
-
-document.addEventListener("DOMContentLoaded", () => {
-  if (window.bulmaCarousel) {
-    window.bulmaCarousel.attach(".carousel", {
-      slidesToScroll: 1,
-      slidesToShow: 1,
-      loop: true,
-      infinite: true,
-      autoplay: true,
-      autoplaySpeed: 5000,
-    });
-  }
-});
